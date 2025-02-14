@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine's Day</title>
+  <style>
+    body {
+      background-color: #ffe6f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      overflow: hidden;
+      padding: 10px;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 30px;
+      color: #cc0052;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s;
+      width: 150px;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    #noButton {
+      position: absolute;
+      background-color: red;
+      color: white;
+    }
+
+    #yesButton {
+      background-color: green;
+      color: white;
+    }
+
+    .message {
+      font-size: 0.9rem;
+      margin-top: 20px;
+      color: #cc0052;
+      white-space: pre-wrap;
+      padding: 15px;
+      background-color: #fff0f5;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: none;
+      position: relative;
+      z-index: 1;
+      max-width: 90%;
+    }
+
+    .heart {
+      position: fixed;
+      color: red;
+      animation: fall 5s linear infinite;
+      font-size: 1.2rem;
+      opacity: 0.7;
+      z-index: 0;
+    }
+
+    .big-title {
+      font-size: 2rem;
+      color: #ff4d6d;
+      margin-bottom: 15px;
+    }
+
+    .emoji {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100%);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+    @media (min-width: 600px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      .big-title {
+        font-size: 3rem;
+      }
+      .emoji {
+        font-size: 2.5rem;
+      }
+      .message {
+        font-size: 1rem;
+      }
+      .buttons {
+        flex-direction: row;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Para Ariana:</h1>
+  <p>¿Quieres ver el mensaje que está en esta carta?</p>
+  <div class="buttons">
+    <button id="yesButton" onclick="showMessage()">Sí</button>
+    <button id="noButton">No</button>
+  </div>
+
+  <div class="message" id="valMessage">
+    <div class="big-title">Feliz San Valentín, Mi Amor</div>
+    <div class="emoji">🧸🎈❤️</div>
+    Feliz San Valentín, amor.
+    No te voy a mentir, la distancia se siente todos los días, pero si algo tengo claro es que vale la pena esperar por ti. Te extraño más de lo que puedo decir en un mensaje, y aunque ahora nos separen kilómetros, siempre te llevo conmigo.
+    Cuando al fin estemos juntos, lo primero que haremos será ir a comer ese pollo a la brasa que tanto nos gusta (porque si algo nos une, además del amor, es la buena comida XD).
+    Sé que hoy no puedo darte flores ni chocolates, y me duele que la distancia me lo impida, pero te prometo que cuando estemos juntos, nunca te faltarán flores, detalles y todo lo que mereces.
+    Además, mi regalo para ti es un viaje a Cusco con el amor de tu vida, o sea yo xd. Vamos a crear recuerdos que ni el tiempo ni la distancia podrán borrar.
+    Mientras tanto, quiero que sepas que cada día que pasa es un día menos para abrazarte y darte besitos. Te amo muchísimo, y no veo la hora de verte y disfrutar cada segundo contigo.
+
+    Con todo mi amor,
+    Ruben ❤️
+  </div>
+
+  <script>
+    function createHearts() {
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.innerHTML = '❤️';
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }, 300);
+    }
+
+    createHearts(); // Corazones siempre visibles en ambas pantallas
+
+    const noButton = document.getElementById('noButton');
+
+    noButton.addEventListener('mouseover', () => {
+      const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+      noButton.style.left = `${x}px`;
+      noButton.style.top = `${y}px`;
+    });
+
+    function showMessage() {
+      document.querySelector('h1').innerText = '';
+      document.querySelector('p').innerText = '';
+      document.querySelector('.buttons').style.display = 'none';
+      document.getElementById('valMessage').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
